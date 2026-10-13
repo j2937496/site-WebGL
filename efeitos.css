@@ -1,0 +1,64 @@
+/* ---------- Atmosfera ---------- */
+body::after{content:"";position:fixed;inset:-10%;z-index:60;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:gr .8s steps(6) infinite}
+@keyframes gr{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(520px circle at var(--lx,50%) var(--ly,40%),rgba(110,90,255,.13),transparent 60%)}
+.poeira{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:7;transform-origin:left;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--ind),var(--gelo),var(--vio));box-shadow:0 0 12px var(--gelo)}
+
+/* ---------- Cursor e clique ---------- */
+body.tem-cursor,body.tem-cursor a,body.tem-cursor button,body.tem-cursor summary,body.tem-cursor input{cursor:none}
+.cur-d,.cur-r{position:fixed;left:0;top:0;pointer-events:none;z-index:200;border-radius:50%}
+.cur-d{width:6px;height:6px;margin:-3px;background:var(--gelo);box-shadow:0 0 12px var(--gelo)}
+.cur-r{width:36px;height:36px;margin:-18px;border:1px solid var(--gelo);transition:scale .25s,background .25s}
+.cur-r.on{scale:1.8;background:rgba(143,216,255,.12)}
+.onda{position:fixed;width:12px;height:12px;margin:-6px;border-radius:50%;border:1px solid var(--gelo);pointer-events:none;z-index:150;animation:onda .9s ease-out forwards}
+@keyframes onda{to{transform:scale(14);opacity:0}}
+
+/* ---------- Títulos ---------- */
+.hero h1{opacity:0;background-size:200% 100%;transition:transform .3s ease-out}
+body.go .hero h1{animation:entrada 2.2s cubic-bezier(.2,.7,.2,1) both,brilho 6s ease-in-out infinite alternate}
+@keyframes entrada{from{opacity:0;letter-spacing:.35em;filter:blur(16px)}to{opacity:1;letter-spacing:.02em;filter:blur(0)}}
+@keyframes brilho{from{background-position:0% 50%}to{background-position:100% 50%}}
+body.go .hero h1{opacity:1}
+h2.rev{opacity:1;transform:none;filter:none}
+h2 .w{display:inline-block;opacity:0;transform:translateY(55%) rotate(5deg);filter:blur(8px);
+  transition:opacity .9s,transform 1s cubic-bezier(.2,.7,.2,1),filter .9s;transition-delay:calc(var(--i) * 80ms)}
+h2.v .w{opacity:1;transform:none;filter:none}
+h2 .w:last-child{color:var(--gelo)}
+
+/* ---------- Cards: brilho que segue o mouse, inclinação e entrada em sequência ---------- */
+.card{position:relative;overflow:hidden}
+.card:hover{z-index:2}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(143,216,255,.2),transparent 60%)}
+.card:hover::before{opacity:1}
+.card.rev{transition:opacity 1s cubic-bezier(.2,.7,.2,1) calc(var(--i,0) * 70ms),transform 1s cubic-bezier(.2,.7,.2,1) calc(var(--i,0) * 70ms),filter 1s ease calc(var(--i,0) * 70ms),background .3s}
+.card.rev.ok{transition:transform .2s ease-out,background .3s,opacity .3s}
+
+/* ---------- Linha do tempo que se desenha ---------- */
+#linhas{position:relative;padding-left:26px}
+#linhas::before{content:"";position:absolute;left:0;top:0;width:2px;height:var(--p,0%);background:linear-gradient(var(--gelo),var(--vio));box-shadow:0 0 14px var(--gelo)}
+.linha{position:relative}
+.linha::before{content:"";position:absolute;left:-30px;top:30px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--ln);transition:.6s}
+.linha.v::before{border-color:var(--gelo);background:var(--gelo);box-shadow:0 0 14px var(--gelo)}
+
+/* ---------- Faixas em movimento ---------- */
+.faixa{position:relative;z-index:2;overflow:hidden;border-block:1px solid var(--ln);padding:22px 0;background:rgba(4,3,15,.6);backdrop-filter:blur(6px)}
+.trilho{display:flex;width:max-content;animation:corre 40s linear infinite}
+.faixa.inv .trilho{animation-direction:reverse}
+.faixa:hover .trilho{animation-play-state:paused}
+.trilho span{font:200 clamp(2rem,5vw,3.6rem)/1 'Sora',sans-serif;padding:0 28px;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(143,216,255,.55)}
+.trilho span::after{content:"✦";color:var(--vio);-webkit-text-stroke:0;margin-left:56px;font-size:.5em;vertical-align:middle}
+@keyframes corre{to{transform:translateX(-50%)}}
+
+/* ---------- Rede neural ---------- */
+.rede-box{border:1px solid var(--ln);background:rgba(8,6,32,.7);backdrop-filter:blur(10px);padding:14px}
+#neural-cv{width:100%;height:min(52vh,420px);display:block}
+.rede-box label{display:flex;gap:14px;align-items:center;font-size:.9rem;margin-top:10px}
+.rede-box input{accent-color:var(--vio);flex:0 1 220px}
+
+@media(prefers-reduced-motion:reduce){body::after,.trilho{animation:none!important}}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="manifest" href="manifest.json">
+<link rel="icon" href="icone-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icone-192.png">
+<meta name="description" content="Um guia interativo em português sobre inteligência artificial: como nasceu, como funciona e como usar.">
+<meta property="og:title" content="Universo Artificial">
+<meta property="og:description" content="Um guia interativo sobre inteligência artificial, com laboratório de redes neurais e quiz.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+    <meta
+    name="theme-color"content="#04030f">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<title>Universo Artificial</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&family=Sora:wght@200;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="efeitos.css">
+<link rel="stylesheet" href="desfazer.css">
+<link rel="stylesheet" href="igloo.css">
+<link rel="stylesheet" href="lab.css">
+<link rel="stylesheet" href="brilho.css">
+<link rel="stylesheet" href="deco3d.css">
+<link rel="stylesheet" href="anel3d.css">
+<link rel="stylesheet" href="responsivo.css">
+<link rel="stylesheet" href="extras.css">
+</head>
+<body>
+<div id="loader"><p>Universo Artificial</p><span id="pct">0</span></div>
+<canvas id="cosmo" aria-hidden="true"></canvas>
+<header class="top"><a href="#inicio">Universo Artificial</a><span id="secao">Início</span></header>
+<button id="som" class="som" aria-pressed="false">Som: off</button>
+<button id="menu" class="menu" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+<nav id="gaveta" class="gaveta" aria-label="Menu"></nav>
+<nav class="dots" id="dots" aria-label="Seções"></nav>
+
+<main>
+  <section id="inicio" data-nome="Início" class="hero">
+    <div class="col">
+      <h1>Universo<br>Artificial</h1>
+      <p class="rev">Uma viagem pela inteligência artificial: de onde ela veio, como funciona e como usar.</p>
+      <a class="btn rev" href="#oque">Entrar</a>
+    </div>
+  </section>
+
+  <section id="oque" data-nome="O que é">
+    <div class="col">
+      <h2 class="rev">Computadores que aprendem padrões.</h2>
+      <p class="rev">Inteligência artificial é o campo da computação que cria sistemas capazes de realizar tarefas que normalmente exigem inteligência humana: reconhecer imagens, entender e escrever textos, tomar decisões e resolver problemas. Em vez de seguir regras escritas passo a passo, os sistemas modernos aprendem com exemplos.</p>
+      <div class="stats rev" id="stats"></div>
+    </div>
+  </section>
+
+    <section id="jornada" data-nome="Jornada" class="jornada">
+    <div class="j-pin">
+      <p class="j-etapa" id="j-etapa"></p>
+      <div class="j-palco" id="j-palco"></div>
+      <p class="j-leg" id="j-leg"></p>
+      <div class="j-trilha"><i id="j-barra"></i></div>
+      <small>Role a página para avançar</small>
+    </div>
+  </section>
+
+  <section id="origem" data-nome="Origem">
+    <div class="col"><h2 class="rev">Oito décadas em uma linha.</h2></div>
+    <div class="wide" id="linhas"></div>
+  </section>
+
+  <section id="funciona" data-nome="Como funciona">
+    <div class="col"><h2 class="rev">Por dentro da máquina.</h2></div>
+    <div class="wide passos rev"><div class="abas" id="abas"></div><article id="passo"></article></div>
+    <div class="wide demo rev">
+      <h3>Teste: prever a próxima palavra</h3>
+      <p>Modelos de linguagem calculam probabilidades. Escolha uma palavra (valores ilustrativos).</p>
+      <p class="frase" id="frase"></p>
+      <div id="barras"></div>
+      <button class="btn ghost" id="reiniciar" hidden>Recomeçar</button>
+    </div>
+  </section>
+
+    <section id="neural" data-nome="Rede neural">
+    <div class="col">
+      <h2 class="rev">Treine uma rede neural com as suas mãos.</h2>
+      <p class="rev">Toque no plano para criar pontos de duas classes, aperte Treinar e veja a rede aprender a separá-los. Ao lado, a rede em 3D: arraste um neurônio para esticá-la.</p>
+    </div>
+    <div class="wide lab rev" id="lab">
+      <div class="lab-bar">
+        <div class="seg" id="lab-classe"><button class="on" data-c="0">Classe A</button><button data-c="1">Classe B</button></div>
+        <div class="seg" id="lab-ex"><button data-ex="linear">Linear</button><button data-ex="xor">XOR</button><button data-ex="circulo">Círculo</button></div>
+        <label>Neurônios <input type="range" id="lab-h" min="2" max="8" value="4" aria-label="Neurônios por camada oculta"><b id="lab-hv">4</b></label>
+        <div class="seg" id="lab-modo"><button data-m="girar">Girar</button><button data-m="moldar">Moldar</button></div>
+        <button class="btn" id="lab-treinar">Treinar</button>
+        <button class="btn ghost" id="lab-limpar">Limpar</button>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-pane"><canvas id="lab-plano" aria-label="Plano de dados"></canvas><small>Plano de dados: toque para adicionar um ponto; toque num ponto para removê-lo.</small></div>
+        <div class="lab-pane"><canvas id="lab-3d" aria-label="Rede neural em 3D"></canvas><small>Azul: peso positivo · Rosa: peso negativo · Espessura: força · Brilho: ativação para o ponto sob o dedo ou mouse.</small></div>
+      </div>
+      <p class="lab-stats" id="lab-stats"></p>
+      <p id="lab-dica"></p>
+      <div class="cards lab-exp">
+        <div class="card"><h3>1. Comece pelo Linear</h3><p>Escolha Linear e aperte Treinar. Uma única reta separa os grupos, então poucos pesos ficam fortes.</p></div>
+        <div class="card"><h3>2. Desafie com o XOR</h3><p>Nenhuma reta separa os grupos. Treine com 2 neurônios e depois com 6, e veja a fronteira ganhar curvas.</p></div>
+        <div class="card"><h3>3. Molde a rede</h3><p>No modo Moldar, arraste um neurônio. A rede é elástica e volta ao lugar. O aprendizado não muda: a posição é só visual.</p></div>
+      </div>
+    </div>
+  </section>
+
+    <section id="linguagem" data-nome="Linguagem">
+    <div class="col">
+      <h2 class="rev">Como um modelo lê e escreve texto.</h2>
+      <p class="rev">Veja o texto dividido em tokens e treine um mini-modelo que prevê a próxima palavra com um texto seu.</p>
+    </div>
+    <div class="wide lab rev" id="ling"></div>
+  </section>
+
+  <section id="tipos" data-nome="Tipos e usos">
+    <div class="col"><h2 class="rev">Várias formas de aprender.</h2></div>
+    <div class="wide cards" id="tipos-lista"></div>
+    <div class="col"><h3 class="sub rev">Onde ela já está</h3></div>
+    <div class="wide cards" id="apps-lista"></div>
+  </section>
+
+  <section id="usar" data-nome="Como usar">
+    <div class="col">
+      <h2 class="rev">Peça com clareza.</h2>
+      <p class="rev">Quanto mais contexto, objetivo e formato você der, melhor a resposta. Copie um exemplo e adapte.</p>
+    </div>
+    <div class="wide cards" id="dicas"></div>
+  </section>
+
+    <section id="criar" data-nome="Criar uma IA">
+    <div class="col">
+      <h2 class="rev">Como criar uma IA, passo a passo.</h2>
+      <p class="rev">Você não precisa começar do zero: dá para treinar um modelo pequeno no seu próprio computador. Clique em cada etapa.</p>
+    </div>
+    <div class="wide" id="criar-box"></div>
+  </section>
+
+  <section id="glossario" data-nome="Glossário">
+    <div class="col">
+      <h2 class="rev">Glossário do universo.</h2>
+      <p class="rev">Procure um termo ou filtre por categoria.</p>
+    </div>
+    <div class="wide" id="gloss-box"></div>
+  </section>
+
+  <section id="riscos" data-nome="Cuidados">
+    <div class="col"><h2 class="rev">Poder exige cuidado.</h2></div>
+    <div class="wide cards" id="riscos-lista"></div>
+  </section>
+
+  <section id="futuro" data-nome="Futuro">
+    <div class="col"><h2 class="rev">O que vem a seguir.</h2></div>
+    <div class="wide cards" id="futuro-lista"></div>
+  </section>
+
+  <section id="faq" data-nome="Dúvidas">
+    <div class="col"><h2 class="rev">Dúvidas comuns.</h2></div>
+    <div class="wide faq" id="lista-faq"></div>
+  </section>
+
+    <section id="quiz" data-nome="Quiz">
+    <div class="col">
+      <h2 class="rev">Teste o que você aprendeu.</h2>
+      <p class="rev">Cinco perguntas rápidas. Seu melhor resultado fica salvo neste aparelho.</p>
+    </div>
+    <div class="wide" id="quiz-box"></div>
+  </section>
+
+    <section id="portal" data-nome="Portal" class="portal">
+    <canvas aria-hidden="true"></canvas>
+    <div class="portal-in">
+      <h2 class="rev">Continue explorando o universo.</h2>
+      <nav class="portal-links rev" aria-label="Atalhos">
+        <a href="#origem" data-forma="esfera">Origem</a>
+        <a href="#funciona" data-forma="toro">Como funciona</a>
+        <a href="#neural" data-forma="helice">Rede neural</a>
+        <a href="#usar" data-forma="cubo">Como usar</a>
+        <a href="#faq" data-forma="espiral">Dúvidas</a>
+      </nav>
+      <p class="rev">Passe o mouse sobre um link e veja as partículas mudarem de forma. Continue rolando para voltar ao começo.</p>
+      <a class="btn ghost rev" href="#inicio">Voltar ao início</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>Universo Artificial · Projeto educativo sobre inteligência artificial · <a href="#inicio">Voltar ao topo</a></footer>
+<script src="config.js"></script>
+<script src="leve.js"></script>
+<script src="script.js"></script>
+<script src="efeitos.js"></script>
+<script src="portal.js"></script>
+<script src="igloo.js"></script>
+<script src="conteudo.js"></script>
+<script src="lab.js"></script>
+<script src="mobile.js"></script>
+<script src="brilho.js"></script>
+<script src="deco3d.js"></script>
+<script src="anel3d.js"></script>
+<script src="extras.js"></script>
+<script src="linguagem.js"></script>
+<script src="jornada.js"></script>
+<script src="quiz.js"></script>
+</body>
+</html>

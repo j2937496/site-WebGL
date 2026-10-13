@@ -1,0 +1,65 @@
+/* ---------- Estrelas que cintilam (só opacidade) ---------- */
+html::before,html::after{content:"";position:fixed;left:0;top:0;width:1px;height:1px;border-radius:50%;pointer-events:none;z-index:0}
+html::before{box-shadow:var(--e1);animation:cintila 4s ease-in-out infinite alternate}
+html::after{box-shadow:var(--e2);animation:cintila 6s ease-in-out -2s infinite alternate}
+@keyframes cintila{from{opacity:.25}to{opacity:1}}
+
+/* ---------- Aurora lenta ao fundo (só transform) ---------- */
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:.55;will-change:transform;
+  background:
+    radial-gradient(40% 35% at 20% 30%,rgba(79,70,255,.28),transparent 70%),
+    radial-gradient(35% 30% at 80% 65%,rgba(155,107,255,.22),transparent 70%),
+    radial-gradient(30% 25% at 55% 85%,rgba(143,216,255,.14),transparent 70%);
+  animation:aurora 40s ease-in-out infinite alternate}
+@keyframes aurora{from{transform:translate3d(-4%,-3%,0) rotate(0deg) scale(1)}to{transform:translate3d(4%,3%,0) rotate(8deg) scale(1.1)}}
+
+/* ---------- Linha luminosa que se desenha sob os títulos ---------- */
+h2::after{content:"";display:block;width:min(160px,40%);height:2px;margin-top:18px;transform-origin:left;
+  background:linear-gradient(90deg,var(--ind),var(--gelo),transparent)}
+.portal h2::after{margin-inline:auto;transform-origin:center}
+@supports (animation-timeline:view()){
+  h2::after{animation:linha linear both;animation-timeline:view();animation-range:entry 20% entry 90%}
+  @keyframes linha{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
+}
+
+/* ---------- Brilho que varre os botões ---------- */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;inset:0;pointer-events:none;transform:translateX(-130%);
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%)}
+.btn:hover::after,.btn:focus-visible::after,.btn:active::after{transform:translateX(130%);transition:transform .7s ease}
+.hero .btn::after{animation:varre 6s ease-in-out 2.5s infinite}
+@keyframes varre{0%{transform:translateX(-130%)}30%,100%{transform:translateX(130%)}}
+
+/* ---------- Sublinhado que corre nos links do portal ---------- */
+.portal-links a{position:relative}
+.portal-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,var(--ind),var(--gelo),var(--vio));transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.portal-links a:hover::after,.portal-links a:focus-visible::after{transform:scaleX(1)}
+
+/* ---------- Nome da seção gigante ao fundo, que desliza ao rolar ---------- */
+section{position:relative}
+section::before{content:attr(data-nome);position:absolute;left:0;top:50%;z-index:-1;white-space:nowrap;pointer-events:none;
+  font:200 clamp(5rem,22vw,15rem)/1 'Sora',sans-serif;color:transparent;-webkit-text-stroke:1px rgba(150,130,255,.13);transform:translateY(-50%)}
+.hero::before,.portal::before{display:none}
+@supports (animation-timeline:view()){
+  section::before{animation:marca linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes marca{from{transform:translate(12%,-50%)}to{transform:translate(-18%,-50%)}}
+}
+
+/* ---------- Detalhes ---------- */
+.card{box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+#secao::before{content:"";display:inline-block;width:6px;height:6px;margin-right:8px;vertical-align:middle;border-radius:50%;
+  background:var(--gelo);box-shadow:0 0 8px var(--gelo);animation:ponto 2s ease-in-out infinite}
+@keyframes ponto{50%{opacity:.25;transform:scale(.7)}}
+::selection{background:rgba(155,107,255,.45);color:#fff}
+html{scrollbar-width:thin;scrollbar-color:#6a5cff #04030f}
+@supports not (scrollbar-color:auto){
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-track{background:#04030f}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(#4f46ff,#9b6bff);border-radius:8px}
+}
+
+/* ---------- Modo leve ---------- */
+html.nivel-baixa .aurora{display:none}
+html.nivel-baixa section::before{animation:none}
+@media(max-width:760px){.aurora{animation-duration:70s;opacity:.45}}

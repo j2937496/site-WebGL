@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="utf-8"><title>Gerar ícones</title>
+<body style="background:#04030f;color:#fff;font-family:sans-serif;padding:24px">
+<p>Clique para baixar cada ícone e salve na pasta do site, ao lado do index.html.</p>
+<button onclick="baixa(192)">Baixar icone-192.png</button>
+<button onclick="baixa(512)">Baixar icone-512.png</button>
+<script>
+function baixa(n){
+  const c=document.createElement("canvas");c.width=c.height=n;const x=c.getContext("2d");
+  x.fillStyle="#04030f";x.fillRect(0,0,n,n);
+  const g=x.createRadialGradient(n*.4,n*.38,0,n/2,n/2,n*.3);
+  g.addColorStop(0,"#fff");g.addColorStop(.3,"#8fd8ff");g.addColorStop(.7,"#9b6bff");g.addColorStop(1,"#4f46ff");
+  x.fillStyle=g;x.beginPath();x.arc(n/2,n/2,n*.26,0,7);x.fill();
+  x.lineWidth=n*.02;
+  x.strokeStyle="#8fd8ff";x.beginPath();x.ellipse(n/2,n/2,n*.4,n*.14,-.5,0,7);x.stroke();
+  x.strokeStyle="#9b6bff";x.beginPath();x.ellipse(n/2,n/2,n*.4,n*.14,.5,0,7);x.stroke();
+  const a=document.createElement("a");a.download="icone-"+n+".png";a.href=c.toDataURL("image/png");a.click();
+}
+</script>

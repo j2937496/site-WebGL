@@ -1,0 +1,45 @@
+/* ============ Base segura ============ */
+:root{--W:76rem}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* ============ Monitores médios e ultralargos: conteúdo centralizado ============ */
+@media(min-width:1100px){
+  section{padding-inline:max(clamp(24px,8vw,120px),calc((100% - var(--W)) / 2))}
+}
+
+/* ============ Telas grandes: o site inteiro cresce junto ============ */
+@media(min-width:1500px){
+  html{font-size:clamp(16px,.62vw + 6px,30px)}
+  .col{max-width:40rem}
+  .wide{max-width:64rem}
+  .hero .col{max-width:60rem}
+  .portal-in{max-width:58rem}
+  .lab-pane canvas{height:clamp(300px,24vw,640px)}
+  .palco{height:clamp(320px,22vw,560px);--pw:clamp(168px,9vw,280px)}
+  .orbita{--s:clamp(280px,15vw,460px)}
+  .cubo{--s:clamp(170px,9vw,300px)}
+  .globo{--s:clamp(220px,12vw,380px)}
+}
+
+/* ============ Telas baixas e largas (celular deitado) ============ */
+@media(max-height:560px) and (orientation:landscape){
+  section{min-height:auto;padding-block:80px 48px;gap:20px}
+  .hero{min-height:100svh;padding-block:80px 40px}
+  h1{font-size:clamp(2.2rem,15vh,4.2rem);margin-bottom:12px}
+  .hero p{margin-bottom:16px}
+  h2{font-size:clamp(1.6rem,7vh,2.6rem)}
+  .deco,.chao,.scroll-hint{display:none}
+  .palco{height:min(80vh,320px)}
+  .lab-pane canvas{height:min(70vh,300px)}
+}
+
+/* luz que segue o mouse (só transform) */
+body::before{display:none}
+.luz{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;z-index:1;pointer-events:none;will-change:transform;
+  background:radial-gradient(circle,rgba(110,90,255,.13),transparent 60%)}
+@media(pointer:coarse){.luz{display:none}}
+
+/* chave das estrelas e modo mínimo (liga sozinho se o site ficar lento) */
+html.sem-estrelas::before,html.sem-estrelas::after{display:none}
+html.modo-minimo .aurora,html.modo-minimo .deco,html.modo-minimo .chao{display:none}
+html.modo-minimo section::before,html.modo-minimo body::after{display:none}

@@ -1,0 +1,57 @@
+/* ---------- Base das decorações ---------- */
+.deco{position:absolute;top:14%;z-index:-1;pointer-events:none;--s:min(240px,22vw);width:var(--s);height:var(--s);perspective:900px}
+.deco.esq{left:5%}
+.deco.dir{right:5%}
+.d3p{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s ease-out}
+.pausa *{animation-play-state:paused!important}
+@supports (animation-timeline:view()){
+  .deco{animation:prof linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes prof{from{transform:translateY(50px)}to{transform:translateY(-50px)}}
+}
+
+/* ---------- 1. Núcleo orbital ---------- */
+.orbita{--s:min(280px,26vw)}
+.d3n{position:absolute;inset:36%;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,var(--gelo) 28%,var(--vio) 62%,transparent 72%);
+  box-shadow:0 0 44px rgba(155,107,255,.75);animation:pulso 3s ease-in-out infinite}
+@keyframes pulso{50%{transform:scale(1.14)}}
+.d3a{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(143,216,255,.5);will-change:transform;
+  box-shadow:0 0 14px rgba(143,216,255,.25),inset 0 0 14px rgba(143,216,255,.15)}
+.d3a::after{content:"";position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 12px var(--gelo)}
+.a1{animation:o1 12s linear infinite}
+.a2{inset:8%;border-color:rgba(155,107,255,.55);animation:o2 17s linear infinite reverse}
+.a3{inset:16%;border-color:rgba(255,107,214,.4);animation:o3 22s linear infinite}
+@keyframes o1{from{transform:rotateX(70deg) rotateZ(0)}to{transform:rotateX(70deg) rotateZ(360deg)}}
+@keyframes o2{from{transform:rotateY(70deg) rotateZ(0)}to{transform:rotateY(70deg) rotateZ(360deg)}}
+@keyframes o3{from{transform:rotateX(40deg) rotateY(50deg) rotateZ(0)}to{transform:rotateX(40deg) rotateY(50deg) rotateZ(360deg)}}
+
+/* ---------- 2. Cubo de vidro (um dentro do outro) ---------- */
+.cubo{--s:min(170px,16vw)}
+.d3c{--h:calc(var(--s) / 2);position:absolute;inset:0;transform-style:preserve-3d;animation:tomba 26s linear infinite;will-change:transform}
+.d3c.in{--h:calc(var(--s) / 4);inset:25%;animation-duration:18s;animation-direction:reverse}
+.d3f{position:absolute;inset:0;border:1px solid rgba(155,107,255,.6);
+  background:linear-gradient(135deg,rgba(79,70,255,.16),rgba(143,216,255,.06));box-shadow:inset 0 0 24px rgba(143,216,255,.2)}
+.d3c.in .d3f{border-color:rgba(143,216,255,.7);background:linear-gradient(135deg,rgba(143,216,255,.18),rgba(155,107,255,.08))}
+@keyframes tomba{from{transform:rotateX(0) rotateY(0)}to{transform:rotateX(360deg) rotateY(360deg)}}
+
+/* ---------- 3. Globo de arame ---------- */
+.globo{--s:min(220px,20vw)}
+.d3g{position:absolute;inset:0;transform-style:preserve-3d;animation:giraY 28s linear infinite;will-change:transform}
+.d3m{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(143,216,255,.38)}
+.d3m.lat{inset:auto;left:calc(var(--s) * .067);top:calc(var(--s) * .067);width:calc(var(--s) * .866);height:calc(var(--s) * .866);border-color:rgba(155,107,255,.4)}
+@keyframes giraY{from{transform:rotateX(-18deg) rotateY(0)}to{transform:rotateX(-18deg) rotateY(360deg)}}
+
+/* ---------- 4. Chão em grade com perspectiva ---------- */
+.hero .col{position:relative;z-index:1}
+.chao{position:absolute;left:0;right:0;bottom:0;height:36%;z-index:0;pointer-events:none;perspective:420px;overflow:hidden;
+  -webkit-mask:linear-gradient(transparent,#000 60%);mask:linear-gradient(transparent,#000 60%)}
+.chao::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;z-index:1;background:linear-gradient(90deg,transparent,var(--gelo),transparent);opacity:.6}
+.d3grade{position:absolute;left:-50%;top:0;width:200%;height:200%;transform-origin:top;will-change:transform;
+  background-image:linear-gradient(rgba(143,216,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(155,107,255,.35) 1px,transparent 1px);
+  background-size:60px 60px;animation:chao 3s linear infinite}
+@keyframes chao{from{transform:rotateX(68deg) translateY(0)}to{transform:rotateX(68deg) translateY(60px)}}
+
+/* ---------- Celular e modo leve ---------- */
+@media(max-width:760px){.deco{display:none}.chao{height:28%}}
+html.nivel-baixa .deco{display:none}
+html.nivel-baixa .d3grade{animation:none}

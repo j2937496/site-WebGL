@@ -1,0 +1,62 @@
+.top{align-items:center}
+.som{background:none;border:1px solid var(--ln);color:var(--tx);border-radius:999px;padding:6px 14px;font:inherit;font-size:.78rem;letter-spacing:.08em;cursor:pointer;transition:.25s}
+.som:hover{border-color:var(--gelo)}
+.som[aria-pressed="true"]{border-color:var(--gelo);color:var(--gelo);box-shadow:0 0 14px rgba(143,216,255,.4)}
+
+/* geada nas bordas conforme a velocidade do scroll */
+.geada{position:fixed;inset:0;z-index:55;pointer-events:none;opacity:var(--g,0);
+  background:radial-gradient(ellipse at center,transparent 35%,rgba(190,225,255,.2) 70%,rgba(235,247,255,.55) 100%);
+  -webkit-backdrop-filter:blur(calc(var(--g,0) * 7px)) saturate(1.3);backdrop-filter:blur(calc(var(--g,0) * 7px)) saturate(1.3);
+  -webkit-mask:radial-gradient(ellipse at center,transparent 38%,#000 100%);mask:radial-gradient(ellipse at center,transparent 38%,#000 100%)}
+
+/* aberração cromática nos textos durante a rolagem */
+h2,.card h3,.linha h3,.ano,.stats b{
+  text-shadow:calc(var(--ca,0) * 1px) 0 rgba(255,40,120,.55),calc(var(--ca,0) * -1px) 0 rgba(40,220,255,.55)}
+
+/* portal de partículas */
+.portal{position:relative;overflow:hidden;background:var(--bg);align-items:center!important;text-align:center;border-top:1px solid var(--ln)}
+.portal canvas{position:absolute;inset:0;width:100%;height:100%}
+.portal-in{position:relative;z-index:2;display:grid;gap:28px;justify-items:center;max-width:900px}
+.portal h2{max-width:none}
+.portal-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 38px}
+.portal-links a{font:200 clamp(1.6rem,4vw,3rem)/1.2 'Sora',sans-serif;color:rgba(255,255,255,.45);transition:color .3s,letter-spacing .4s,text-shadow .3s}
+.portal-links a:hover,.portal-links a:focus-visible{color:#fff;letter-spacing:.06em;text-shadow:0 0 26px var(--gelo)}
+
+/* ---- modo leve (ativado pelo nível em config.js) ---- */
+html.nivel-baixa body::after,html.nivel-baixa body::before{display:none}
+html.nivel-baixa *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.nivel-baixa .rev,html.nivel-baixa h2 .w,html.nivel-baixa h2 .l{filter:none!important}
+html.nivel-media body::after{animation:none}
+
+/* ---- Como criar uma IA e Glossário ---- */
+.passos article h3{font:200 1.9rem 'Sora',sans-serif;margin-bottom:12px}
+#criar-box{display:grid;gap:40px}
+.codigo{white-space:pre;overflow-x:auto;font:.85rem/1.6 ui-monospace,Menlo,Consolas,monospace;background:rgba(0,0,0,.45);color:var(--gelo);padding:18px;border:1px solid var(--ln);margin:14px 0}
+.demo code{color:var(--gelo)}
+.gbarra{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px}
+.gbarra input{flex:1 1 240px;background:rgba(8,6,32,.7);border:1px solid var(--ln);color:#fff;padding:12px 18px;border-radius:999px;font:inherit}
+.gbarra input:focus{outline:none;border-color:var(--gelo)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:none;border:1px solid var(--ln);color:var(--tx);border-radius:999px;padding:8px 16px;font:inherit;font-size:.85rem;cursor:pointer;transition:.2s}
+.chip.on{background:linear-gradient(120deg,var(--ind),var(--vio));color:#fff;border-color:transparent}
+.gcont{font-size:.85rem;margin-bottom:12px}
+.card small{color:var(--gelo);font-size:.75rem}
+/* ---- modo leve (ativado pelo nível em config.js) ---- */
+html.nivel-baixa body::after,html.nivel-baixa body::before{display:none}
+html.nivel-baixa *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html.nivel-baixa .rev,html.nivel-baixa h2 .w,html.nivel-baixa h2 .l{filter:none!important}
+html.nivel-media body::after{animation:none}
+
+/* ---- Como criar uma IA e Glossário ---- */
+.passos article h3{font:200 1.9rem 'Sora',sans-serif;margin-bottom:12px}
+#criar-box{display:grid;gap:40px}
+.codigo{white-space:pre;overflow-x:auto;font:.85rem/1.6 ui-monospace,Menlo,Consolas,monospace;background:rgba(0,0,0,.45);color:var(--gelo);padding:18px;border:1px solid var(--ln);margin:14px 0}
+.demo code{color:var(--gelo)}
+.gbarra{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px}
+.gbarra input{flex:1 1 240px;background:rgba(8,6,32,.7);border:1px solid var(--ln);color:#fff;padding:12px 18px;border-radius:999px;font:inherit}
+.gbarra input:focus{outline:none;border-color:var(--gelo)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:none;border:1px solid var(--ln);color:var(--tx);border-radius:999px;padding:8px 16px;font:inherit;font-size:.85rem;cursor:pointer;transition:.2s}
+.chip.on{background:linear-gradient(120deg,var(--ind),var(--vio));color:#fff;border-color:transparent}
+.gcont{font-size:.85rem;margin-bottom:12px}
+.card small{color:var(--gelo);font-size:.75rem}

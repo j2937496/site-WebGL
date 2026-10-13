@@ -1,0 +1,25 @@
+/* canvas do iglu e das partículas de gelo */
+.gelo-cv{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+
+/* letras que se desfazem */
+h2 .l{
+  display:inline-block;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .4s,filter .4s;
+  transform:
+    translate(calc(var(--rx) * var(--d,0) * 1px + var(--hx,0) * 1px),calc(var(--ry) * var(--d,0) * 1px + var(--hy,0) * 1px))
+    rotate(calc(var(--rr) * var(--d,0) * 1deg));
+  opacity:calc(1 - var(--d,0) * 1.1);
+  filter:blur(calc(var(--d,0) * 5px));
+}
+
+/* borda de gelo que gira nos cards */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+.card::after{
+  content:"";position:absolute;inset:0;padding:1px;pointer-events:none;opacity:0;transition:opacity .4s;
+  background:conic-gradient(from var(--ang),transparent 0%,transparent 55%,rgba(143,216,255,.95) 80%,rgba(155,107,255,.95) 92%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:giro 3s linear infinite;
+}
+.card:hover::after{opacity:1}
+@keyframes giro{to{--ang:360deg}}

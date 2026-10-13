@@ -1,0 +1,103 @@
+/* ---------- Laboratório ---------- */
+.lab{border:1px solid var(--ln);background:rgba(8,6,32,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:clamp(14px,3vw,28px);display:grid;gap:16px}
+.lab-bar{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.lab-bar label{display:flex;gap:10px;align-items:center;font-size:.9rem}
+.lab-bar input[type=range]{accent-color:var(--vio);width:120px}
+.lab-bar .btn{padding:10px 24px;min-height:44px}
+.seg{display:flex;border:1px solid var(--ln);border-radius:999px;overflow:hidden}
+.seg button{background:none;border:0;color:var(--tx);padding:10px 16px;font:inherit;font-size:.85rem;cursor:pointer;min-height:44px;transition:.2s}
+.seg button.on{background:linear-gradient(120deg,var(--ind),var(--vio));color:#fff}
+.lab-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:14px}
+.lab-pane{display:grid;gap:6px;align-content:start}
+.lab-pane canvas{width:100%;height:clamp(280px,70vw,400px);display:block;border:1px solid var(--ln);background:rgba(4,3,15,.7)}
+#lab-plano{touch-action:manipulation;cursor:crosshair}
+#lab-3d{cursor:grab}
+.lab small{font-size:.82rem}
+.lab-stats{font-variant-numeric:tabular-nums;min-height:1.4em;color:var(--gelo);font-size:.9rem}
+
+/* ---------- Menu do celular ---------- */
+.top{z-index:95}
+.top > a:first-child,.top .som,.menu{position:relative;z-index:2}
+.menu{display:none;width:44px;height:44px;background:none;border:1px solid var(--ln);border-radius:50%;place-content:center;gap:6px;cursor:pointer}
+.menu span{display:block;width:18px;height:1.5px;background:#fff;transition:.3s}
+.menu[aria-expanded="true"] span:first-child{transform:translateY(3.7px) rotate(45deg)}
+.menu[aria-expanded="true"] span:last-child{transform:translateY(-3.7px) rotate(-45deg)}
+.gaveta{position:fixed;inset:0;z-index:1;display:grid;align-content:center;gap:4px;padding:80px 28px;background:rgba(4,3,15,.97);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.gaveta.on{opacity:1;visibility:visible}
+.gaveta a{font:200 1.7rem/1.2 'Sora',sans-serif;color:#fff;padding:12px 0;min-height:48px;border-bottom:1px solid var(--ln)}
+body.sem-rolagem{overflow:hidden}
+
+/* ---------- Ajustes para celular ---------- */
+section{min-height:100svh}
+@media(max-width:760px){
+  .menu{display:grid}
+  .top{padding:12px 18px}
+  .top #secao{display:none}
+  section{padding:96px 20px 56px;gap:24px}
+  h2{font-size:clamp(1.8rem,8vw,2.6rem)}
+  .btn,.chip,.abas button,.copiar,.faq summary{min-height:44px}
+  .cards{grid-template-columns:1fr}
+  .lab-grid{grid-template-columns:1fr}
+  .lab-bar{gap:10px 12px}
+  .stats{gap:18px 28px}
+  .linha{grid-template-columns:70px 1fr}
+  .portal-links a{font-size:1.7rem}
+  .som{padding:8px 12px}
+  .faixa{padding:14px 0}
+}
+@media(pointer:coarse){
+  body::after{display:none}
+  .card::after{display:none}
+}
+
+/* ---------- Correções para celular ---------- */
+html,body{overflow-x:hidden;max-width:100%}
+body{position:relative;width:100%}
+main,section,footer,.faixa,.portal{overflow-x:clip}
+.col,.wide,.lab-pane,.lab-grid>*,#criar-box>*{min-width:0}
+.codigo{max-width:100%}
+.card,.demo,.panel{overflow-wrap:anywhere}
+
+/* menu: a lista começa abaixo da barra e rola se for grande */
+.gaveta{align-content:start;overflow-y:auto;padding:88px 24px 32px;-webkit-overflow-scrolling:touch}
+.gaveta a{font-size:1.45rem;padding:10px 0;min-height:48px}
+body.sem-rolagem .top{background:var(--bg)}
+
+@media(max-width:760px){
+  @keyframes entrada{from{opacity:0;letter-spacing:.08em;filter:blur(12px)}to{opacity:1;letter-spacing:.02em;filter:blur(0)}}
+  h1{font-size:clamp(2.6rem,13vw,4.2rem)}
+  .hero p{font-size:1.02rem}
+  .top > a:first-child{font-size:.82rem;letter-spacing:.06em}
+  .som{font-size:.7rem}
+  .card,.demo,.lab,.panel{padding:18px}
+  .cards,.passos{grid-template-columns:minmax(0,1fr)}
+  .linha{grid-template-columns:72px minmax(0,1fr)}
+  .ano{font-size:1.25rem}
+  .frase{font-size:1.15rem}
+  .stats b{font-size:2.2rem}
+}
+
+/* ---------- Menu do celular (versão corrigida) ---------- */
+html{overflow-x:visible}
+.top{z-index:95}
+.gaveta{
+  position:fixed;top:0;left:0;width:100%;height:100%;height:100dvh;z-index:90;
+  display:flex;flex-direction:column;justify-content:flex-start;gap:0;
+  padding:92px 24px 32px;background:#04030f;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;
+}
+.gaveta.on{opacity:1;visibility:visible}
+.gaveta a{display:block;font:200 1.5rem/1.2 'Sora',sans-serif;color:#fff;padding:14px 0;min-height:52px;border-bottom:1px solid var(--ln)}
+html.sem-rolagem,body.sem-rolagem{overflow:hidden}
+body.sem-rolagem .top{background:#04030f}
+
+/* ---------- Desempenho ---------- */
+h2 .l{filter:none}
+h2.dis .l{filter:blur(calc(var(--d,0) * 5px))}
+@media(pointer:coarse),(max-width:760px){
+  *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .card,.demo,.lab,.faixa{background-color:rgba(6,5,26,.92)}
+  h2.dis .l,h2 .w{filter:none!important}
+  body{background-attachment:scroll}
+}
